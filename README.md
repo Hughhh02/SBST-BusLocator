@@ -7,7 +7,7 @@ The system provides continuous, zero-drift localization by fusing real-time visu
 📌 System Architecture
 The localization pipeline completely eliminates the need for expensive infrastructure (e.g., LiDAR, BLE beacons, UWB) by treating the bus as an autonomous agent. It operates across two parallel engines:
 
-1. Kinematic Engine (Dead Reckoning)
+**1. Kinematic Engine (Dead Reckoning)**
 Because direct J1939 CAN tapping and steering angle sensors are unavailable, the system relies on differential kinematics pulled from the Stratio Predictive Maintenance API.
 
 Longitudinal Speed: Derived from Vehicle Speed (ID 114) or Tacho Speed (ID 460).
@@ -16,7 +16,7 @@ Yaw Rate (Heading): Calculated via differential wheel speeds using the Front Lef
 
 Function: Pushes the bus state forward continuously on a 2.5D Topological Graph.
 
-2. Vision Engine (Absolute Anchoring)
+**2. Vision Engine (Absolute Anchoring)**
 An onboard CCTV camera runs an edge-optimized RF-DETR (Detection Transformer) model to provide absolute spatial ground truths.
 
 Landmark Detection: Detects known static depot infrastructure (e.g., numbered berths, painted pillars).
@@ -25,7 +25,7 @@ Coordinate Lookup: Translates the 2D bounding box into a physical distance and q
 
 Function: Outputs absolute [X, Y, Z-floor] coordinates to instantly kill dead reckoning drift.
 
-#3. Sensor Fusion (Delay-State EKF)
+**3. Sensor Fusion (Delay-State EKF)**
 Fusing real-time edge video with batched cloud telemetry introduces significant asynchronous latency. The system uses a Delay-State EKF to solve this:
 
 Retrospective Updating: Maintains a timestamped rolling buffer of kinematic states. When a delayed visual anchor arrives, the EKF rewinds the buffer to the exact UNIX timestamp of the video frame, applies the absolute coordinate, and fast-forwards the math back to the present millisecond.
