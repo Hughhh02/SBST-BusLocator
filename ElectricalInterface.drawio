@@ -1,144 +1,76 @@
-<mxfile host="app.diagrams.net" modified="2026-09-18T08:00:00.000Z" agent="Mozilla/5.0" version="24.0.0" type="device">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0">
   <diagram id="electrical-interface" name="Electrical Interface">
-    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="880" math="0" shadow="0">
+    <mxGraphModel dx="994" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="880" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-
-        <!-- ================= CONTAINERS ================= -->
-        <mxCell id="bus_infra" value="&lt;b&gt;BUS ELECTRICAL INFRASTRUCTURE&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 4;fillColor=#F8FAFC;strokeColor=#94A3B8;verticalAlign=top;fontColor=#475569;spacingTop=10;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="40" width="220" height="420" as="geometry" />
+        <mxCell id="edge_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 4;fillColor=#F1F5F9;strokeColor=#94A3B8;verticalAlign=top;fontColor=#475569;spacingTop=10;fontSize=12;" value="&lt;b&gt;IPS EDGE HARDWARE (e.g., NVIDIA Jetson)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="420" width="380" x="110" y="60" as="geometry" />
         </mxCell>
-
-        <mxCell id="edge_box" value="&lt;b&gt;IPS EDGE HARDWARE (e.g., NVIDIA Jetson)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 4;fillColor=#F1F5F9;strokeColor=#94A3B8;verticalAlign=top;fontColor=#475569;spacingTop=10;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="320" y="40" width="380" height="420" as="geometry" />
+        <mxCell id="peripherals_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 4;fillColor=#F8FAFC;strokeColor=#94A3B8;verticalAlign=top;fontColor=#475569;spacingTop=10;fontSize=12;" value="&lt;b&gt;PERIPHERALS &amp;amp; CLOUD&lt;/b&gt;" vertex="1">
+          <mxGeometry height="420" width="280" x="550" y="60" as="geometry" />
         </mxCell>
-
-        <mxCell id="peripherals_box" value="&lt;b&gt;PERIPHERALS &amp;amp; CLOUD&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 4;fillColor=#F8FAFC;strokeColor=#94A3B8;verticalAlign=top;fontColor=#475569;spacingTop=10;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="760" y="40" width="280" height="420" as="geometry" />
+        <mxCell id="dcdc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F59E0B;strokeColor=#B45309;fontColor=#FFFFFF;shadow=1;arcSize=10;" value="&lt;b&gt;DC-DC Power Supply &amp;amp; UPS&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;Input: 9V - 36V DC&lt;br&gt;Output: Regulated 19V DC&lt;br&gt;Feature: Ignition Sensing Auto-Shutdown&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="300" x="150" y="325" as="geometry" />
         </mxCell>
-
-        <!-- ================= COMPONENTS ================= -->
-        <!-- Bus Battery -->
-        <mxCell id="battery" value="&lt;b&gt;Bus Main Battery&lt;/b&gt;&lt;br&gt;24V DC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E2E8F0;strokeColor=#475569;fontColor=#0F172A;shadow=1;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="70" y="100" width="160" height="60" as="geometry" />
+        <mxCell id="jetson" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#10B981;strokeColor=#047857;fontColor=#FFFFFF;shadow=1;arcSize=5;verticalAlign=top;spacingTop=10;" value="&lt;b&gt;Edge Compute Node&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;(RF-DETR + Kalman Filter Engine)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="150" width="300" x="150" y="120" as="geometry" />
         </mxCell>
-
-        <!-- Ignition Switch -->
-        <mxCell id="ignition" value="&lt;b&gt;Ignition Circuit&lt;/b&gt;&lt;br&gt;(Terminal 15 / ACC)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E2E8F0;strokeColor=#475569;fontColor=#0F172A;shadow=1;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="70" y="200" width="160" height="60" as="geometry" />
+        <mxCell id="port_pwr" parent="jetson" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0F172A;fontColor=#FFFFFF;fontSize=10;" value="DC IN Block" vertex="1">
+          <mxGeometry height="20" width="100" x="100" y="130" as="geometry" />
         </mxCell>
-
-        <!-- Inline Fuse Box -->
-        <mxCell id="fuses" value="&lt;b&gt;Automotive Fuse Block&lt;/b&gt;&lt;br&gt;(5A / 10A Fuses)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CBD5E1;strokeColor=#334155;fontColor=#0F172A;shadow=1;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="70" y="320" width="160" height="60" as="geometry" />
+        <mxCell id="port_eth" parent="jetson" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1E3A8A;fontColor=#FFFFFF;fontSize=10;" value="RJ45 / M12 (PoE)" vertex="1">
+          <mxGeometry height="20" width="100" x="200" y="40" as="geometry" />
         </mxCell>
-
-        <!-- DC-DC Converter / UPS -->
-        <mxCell id="dcdc" value="&lt;b&gt;DC-DC Power Supply &amp;amp; UPS&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;Input: 9V - 36V DC&lt;br&gt;Output: Regulated 19V DC&lt;br&gt;Feature: Ignition Sensing Auto-Shutdown&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F59E0B;strokeColor=#B45309;fontColor=#FFFFFF;shadow=1;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="360" y="305" width="300" height="90" as="geometry" />
+        <mxCell id="port_sma" parent="jetson" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#7C3AED;fontColor=#FFFFFF;fontSize=10;" value="SMA (Antenna)" vertex="1">
+          <mxGeometry height="20" width="100" x="200" y="90" as="geometry" />
         </mxCell>
-
-        <!-- Jetson / Edge PC -->
-        <mxCell id="jetson" value="&lt;b&gt;Edge Compute Node&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;(RF-DETR + Kalman Filter Engine)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#10B981;strokeColor=#047857;fontColor=#FFFFFF;shadow=1;arcSize=5;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
-          <mxGeometry x="360" y="100" width="300" height="150" as="geometry" />
+        <mxCell id="camera" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E293B;strokeColor=#0F172A;fontColor=#FFFFFF;shadow=1;arcSize=10;" value="&lt;b&gt;Onboard IP CCTV Camera&lt;/b&gt;&lt;br&gt;Power over Ethernet (PoE)" vertex="1">
+          <mxGeometry height="60" width="200" x="590" y="140" as="geometry" />
         </mxCell>
-
-        <!-- Jetson Ports -->
-        <mxCell id="port_pwr" value="DC IN Block" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0F172A;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="jetson">
-          <mxGeometry x="100" y="130" width="100" height="20" as="geometry" />
+        <mxCell id="antenna" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E293B;strokeColor=#0F172A;fontColor=#FFFFFF;shadow=1;arcSize=10;" value="&lt;b&gt;LTE / 4G Roof Antenna&lt;/b&gt;&lt;br&gt;MIMO / FAKRA" vertex="1">
+          <mxGeometry height="60" width="200" x="590" y="260" as="geometry" />
         </mxCell>
-
-        <mxCell id="port_eth" value="RJ45 / M12 (PoE)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1E3A8A;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="jetson">
-          <mxGeometry x="200" y="40" width="100" height="20" as="geometry" />
+        <mxCell id="cloud" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#3B82F6;strokeColor=#1D4ED8;fontColor=#FFFFFF;shadow=1;" value="&lt;b&gt;Stratio Cloud API&lt;/b&gt;&lt;br&gt;(Cellular Telemetry Payload)" vertex="1">
+          <mxGeometry height="80" width="150" x="615" y="350" as="geometry" />
         </mxCell>
-
-        <mxCell id="port_sma" value="SMA (Antenna)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#7C3AED;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="jetson">
-          <mxGeometry x="200" y="90" width="100" height="20" as="geometry" />
-        </mxCell>
-
-        <!-- Camera -->
-        <mxCell id="camera" value="&lt;b&gt;Onboard IP CCTV Camera&lt;/b&gt;&lt;br&gt;Power over Ethernet (PoE)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E293B;strokeColor=#0F172A;fontColor=#FFFFFF;shadow=1;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="800" y="120" width="200" height="60" as="geometry" />
-        </mxCell>
-
-        <!-- Roof Antenna -->
-        <mxCell id="antenna" value="&lt;b&gt;LTE / 4G Roof Antenna&lt;/b&gt;&lt;br&gt;MIMO / FAKRA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E293B;strokeColor=#0F172A;fontColor=#FFFFFF;shadow=1;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="800" y="240" width="200" height="60" as="geometry" />
-        </mxCell>
-
-        <!-- Cloud API -->
-        <mxCell id="cloud" value="&lt;b&gt;Stratio Cloud API&lt;/b&gt;&lt;br&gt;(Cellular Telemetry Payload)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#3B82F6;strokeColor=#1D4ED8;fontColor=#FFFFFF;shadow=1;" vertex="1" parent="1">
-          <mxGeometry x="825" y="330" width="150" height="80" as="geometry" />
-        </mxCell>
-
-        <!-- ================= EDGES (WIRING) ================= -->
-
-        <!-- Battery to Fuses (+24V Red) -->
-        <mxCell id="wire_batt_fuse" value="&lt;font color=&quot;#DC2626&quot;&gt;&lt;b&gt;+24V (BATT)&lt;/b&gt;&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#DC2626;strokeWidth=3;" edge="1" parent="1" source="battery" target="fuses">
+        <mxCell id="wire_batt_fuse" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#DC2626;strokeWidth=3;" value="&lt;font color=&quot;#DC2626&quot;&gt;&lt;b&gt;+24V (BATT)&lt;/b&gt;&lt;/font&gt;">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <Point x="120" y="280" />
               <Point x="120" y="280" />
             </Array>
+            <mxPoint x="NaN" y="160" as="sourcePoint" />
+            <mxPoint x="NaN" y="380" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-
-        <!-- Battery to Fuses (GND Black) -->
-        <mxCell id="wire_gnd_fuse" value="&lt;b&gt;GND&lt;/b&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=3;" edge="1" parent="1" source="battery" target="fuses">
+        <mxCell id="wire_gnd_fuse" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=3;" value="&lt;b&gt;GND&lt;/b&gt;">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <Point x="200" y="280" />
               <Point x="200" y="280" />
             </Array>
+            <mxPoint x="NaN" y="160" as="sourcePoint" />
+            <mxPoint x="NaN" y="380" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-
-        <!-- Ignition to Fuses (ACC Orange) -->
-        <mxCell id="wire_acc_fuse" value="&lt;font color=&quot;#EA580C&quot;&gt;&lt;b&gt;+24V (ACC)&lt;/b&gt;&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#EA580C;strokeWidth=2;dashed=1;" edge="1" parent="1" source="ignition" target="fuses">
+        <mxCell id="wire_dcdc_jetson" edge="1" parent="1" source="dcdc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=3;exitX=0.5;exitY=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="port_pwr" value="&lt;font color=&quot;#DC2626&quot;&gt;&lt;b&gt;Regulated 19V DC &amp;amp; GND&lt;/b&gt;&lt;/font&gt;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- Fuses to DC-DC (+24V Red) -->
-        <mxCell id="wire_fuse_dcdc_pwr" value="Fused +24V" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#DC2626;strokeWidth=3;entryX=0;entryY=0.25;" edge="1" parent="1" source="fuses" target="dcdc">
+        <mxCell id="wire_eth" edge="1" parent="1" source="port_eth" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1E3A8A;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="camera" value="&lt;font color=&quot;#1E3A8A&quot;&gt;&lt;b&gt;Cat6 Ethernet (Data + PoE)&lt;/b&gt;&lt;/font&gt;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- Fuses to DC-DC (ACC Orange) -->
-        <mxCell id="wire_fuse_dcdc_acc" value="Fused ACC" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#EA580C;strokeWidth=2;dashed=1;entryX=0;entryY=0.5;" edge="1" parent="1" source="fuses" target="dcdc">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <!-- Fuses to DC-DC (GND Black) -->
-        <mxCell id="wire_fuse_dcdc_gnd" value="GND" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=3;entryX=0;entryY=0.75;" edge="1" parent="1" source="fuses" target="dcdc">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-
-        <!-- DC-DC to Jetson -->
-        <mxCell id="wire_dcdc_jetson" value="&lt;font color=&quot;#DC2626&quot;&gt;&lt;b&gt;Regulated 19V DC &amp;amp; GND&lt;/b&gt;&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=3;exitX=0.5;exitY=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="dcdc" target="port_pwr">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-
-        <!-- Jetson to Camera (Ethernet) -->
-        <mxCell id="wire_eth" value="&lt;font color=&quot;#1E3A8A&quot;&gt;&lt;b&gt;Cat6 Ethernet (Data + PoE)&lt;/b&gt;&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1E3A8A;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="port_eth" target="camera">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-
-        <!-- Jetson to Antenna (SMA) -->
-        <mxCell id="wire_sma" value="&lt;font color=&quot;#7C3AED&quot;&gt;&lt;b&gt;Coaxial RF Cable&lt;/b&gt;&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#7C3AED;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="port_sma" target="antenna">
+        <mxCell id="wire_sma" edge="1" parent="1" source="port_sma" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#7C3AED;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="antenna" value="&lt;font color=&quot;#7C3AED&quot;&gt;&lt;b&gt;Coaxial RF Cable&lt;/b&gt;&lt;/font&gt;">
           <mxGeometry relative="1" as="geometry">
-             <Array as="points">
+            <Array as="points">
               <Point x="720" y="200" />
               <Point x="720" y="270" />
             </Array>
           </mxGeometry>
         </mxCell>
-
-        <!-- Antenna to Cloud (Wireless) -->
-        <mxCell id="wire_rf" value="&lt;font color=&quot;#10B981&quot;&gt;&lt;b&gt;4G/5G Cellular Network&lt;/b&gt;&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#10B981;strokeWidth=3;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="antenna" target="cloud">
+        <mxCell id="wire_rf" edge="1" parent="1" source="antenna" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#10B981;strokeWidth=3;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="cloud" value="&lt;font color=&quot;#10B981&quot;&gt;&lt;b&gt;4G/5G Cellular Network&lt;/b&gt;&lt;/font&gt;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
       </root>
     </mxGraphModel>
   </diagram>
