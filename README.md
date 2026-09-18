@@ -4,7 +4,7 @@
 
 This repository contains a Machine Learning-based Dead Reckoning (DR) model designed to track continuous vehicle positioning in environments with degraded or denied GPS/GNSS signals.
 
-The system relies on high-frequency vehicle telemetry—specifically FMS CAN bus data—which is extracted and served entirely via the Stratio API. The ML engine processes this data to predict trajectories. To counteract the inherent system drift typical in dead reckoning, the model integrates a validation and correction loop using RF-DETR (Detection Transformer) based locationing.
+The system relies on high-frequency vehicle telemetry served entirely via the Stratio API. The ML engine processes this data to predict trajectories. To counteract the inherent system drift typical in dead reckoning, the model integrates a validation and correction loop using RF-DETR (Detection Transformer) based locationing.
 
 🏗️ System Architecture
 
@@ -18,7 +18,8 @@ Initialization: Fetches anchor GPS coordinates (when available) to initialize or
 
 ML Dead Reckoning Engine:
 
-Processes sequential CAN data fetched from Stratio using [Insert Model Architecture, e.g., LSTM / Transformer / Neural Kalman Filter] to predict continuous relative displacement and heading changes.
+Processes sequential CAN data fetched from Stratio using  to predict continuous relative displacement and heading changes.
+
 
 Drift Correction (RF-DETR):
 
@@ -38,6 +39,8 @@ Installation
 
 Clone the repository and install the required dependencies:
 
+'''
 git clone https://github.com/your-org/dead-reckoning-ml.git
 cd dead-reckoning-ml
 pip install -r requirements.txt
+'''
