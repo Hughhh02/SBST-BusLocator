@@ -1,46 +1,41 @@
-# Dead Reckoning ML with FMS CAN & Stratio API
+Vision-Kinematic Ego-Localization for GPS-Denied Transit Depots
+This repository contains the software pipeline for an onboard Indoor Positioning System (IPS) designed for SBS Transit (SBST) buses operating in GPS-denied environments (e.g., underground depots).
 
-📌 Overview
+The system provides continuous, zero-drift localization by fusing real-time visual anchors (RF-DETR) with batched cloud-based engine telemetry (Stratio API) using a dynamically calibrating, Delay-State Extended Kalman Filter (EKF).
 
-This repository contains a Machine Learning-based Dead Reckoning (DR) model designed to track continuous vehicle positioning in environments with degraded or denied GPS/GNSS signals.
+📌 System Architecture
+The localization pipeline completely eliminates the need for expensive infrastructure (e.g., LiDAR, BLE beacons, UWB) by treating the bus as an autonomous agent. It operates across two parallel engines:
 
-The system relies on high-frequency vehicle telemetry served entirely via the Stratio API. The ML engine processes this data to predict trajectories. To counteract the inherent system drift typical in dead reckoning, the model integrates a validation and correction loop using RF-DETR (Detection Transformer) based locationing.
+1. Kinematic Engine (Dead Reckoning)
+Because direct J1939 CAN tapping and steering angle sensors are unavailable, the system relies on differential kinematics pulled from the Stratio Predictive Maintenance API.
 
-🏗️ System Architecture
+Longitudinal Speed: Derived from Vehicle Speed (ID 114) or Tacho Speed (ID 460).
 
-Data Ingestion (Stratio API):
+Yaw Rate (Heading): Calculated via differential wheel speeds using the Front Left (ID 463) and Front Right (ID 464) axle rotations divided by the physical track width of the bus chassis.
 
-Acts as the centralized data pipeline for the system.
+Function: Pushes the bus state forward continuously on a 2.5D Topological Graph.
 
-FMS CAN Data: The API provides access to extracted vehicle kinematic data (e.g., wheel speed, steering angle, yaw rate, transmission status, and odometer readings) originally logged from the vehicle's J1939 CAN network.
+2. Vision Engine (Absolute Anchoring)
+An onboard CCTV camera runs an edge-optimized RF-DETR (Detection Transformer) model to provide absolute spatial ground truths.
 
-Initialization: Fetches anchor GPS coordinates (when available) to initialize or anchor the dead reckoning loop.
+Landmark Detection: Detects known static depot infrastructure (e.g., numbered berths, painted pillars).
 
-ML Dead Reckoning Engine:
+Coordinate Lookup: Translates the 2D bounding box into a physical distance and queries a lightweight JSON/CSV 2D Lookup Table (LUT).
 
-Processes sequential CAN data fetched from Stratio using  to predict continuous relative displacement and heading changes.
+Function: Outputs absolute [X, Y, Z-floor] coordinates to instantly kill dead reckoning drift.
 
+3. Sensor Fusion (Delay-State EKF)
+Fusing real-time edge video with batched cloud telemetry introduces significant asynchronous latency. The system uses a Delay-State EKF to solve this:
 
-Drift Correction (RF-DETR):
+Retrospective Updating: Maintains a timestamped rolling buffer of kinematic states. When a delayed visual anchor arrives, the EKF rewinds the buffer to the exact UNIX timestamp of the video frame, applies the absolute coordinate, and fast-forwards the math back to the present millisecond.
 
-Acts as the ground-truth validation layer.
+Dynamic Bias Calibration: The EKF tracks a fourth state (Scale_Factor) to dynamically learn and correct systematic kinematic errors (e.g., worn tire treads, varying passenger weight) based on observed visual discrepancies.
 
-Detects location-specific spatial/RF anchors to compute absolute positioning, resetting the accumulated error (drift) of the DR engine.
+🚀 Key Features
+Hardware-Light: Requires only a standard onboard IP camera and an active Stratio API token.
 
-⚙️ Prerequisites
+Self-Calibrating Odometry: The system learns and filters kinematic bias over time using visual ground truths.
 
-Python 3.8+
+2.5D Topological Mapping: Abandons heavy 3D CAD/BIM models in favor of a lightweight node-edge map. Ramp elevations are handled logically via state-machine transitions rather than barometric sensors.
 
-GPU with CUDA support (recommended for RF-DETR inference and DR model training)
-
-Valid Stratio API credentials (Client ID, Secret, and Fleet/Vehicle IDs)
-
-Installation
-
-Clone the repository and install the required dependencies:
-
-```
-git clone https://github.com/Hughhh02/SBST-BusLocator.git
-cd dead-reckoning-ml
-pip install -r requirements.txt
-```
+Out-of-Sequence Measurement (OOSM) Handling: Safely fuses high-frequency local video with low-frequency batched cellular API payloads without mathematical divergence.
