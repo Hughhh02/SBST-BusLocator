@@ -1,10 +1,10 @@
-#Vision-Kinematic Ego-Localization for GPS-Denied Transit Depots
-
+# Vision-Kinematic Ego-Localization for GPS-Denied Transit Depots
 This repository contains the software pipeline for an onboard Indoor Positioning System (IPS) designed for SBS Transit (SBST) buses operating in GPS-denied environments (e.g., underground depots).
 
 The system provides continuous, zero-drift localization by fusing real-time visual anchors (RF-DETR) with batched cloud-based engine telemetry (Stratio API) using a dynamically calibrating, Delay-State Extended Kalman Filter (EKF).
 
-#📌 System Architecture
+
+📌 System Architecture
 The localization pipeline completely eliminates the need for expensive infrastructure (e.g., LiDAR, BLE beacons, UWB) by treating the bus as an autonomous agent. It operates across two parallel engines:
 
 1. Kinematic Engine (Dead Reckoning)
@@ -16,7 +16,7 @@ Yaw Rate (Heading): Calculated via differential wheel speeds using the Front Lef
 
 Function: Pushes the bus state forward continuously on a 2.5D Topological Graph.
 
-#2. Vision Engine (Absolute Anchoring)
+2. Vision Engine (Absolute Anchoring)
 An onboard CCTV camera runs an edge-optimized RF-DETR (Detection Transformer) model to provide absolute spatial ground truths.
 
 Landmark Detection: Detects known static depot infrastructure (e.g., numbered berths, painted pillars).
