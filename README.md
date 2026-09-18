@@ -39,8 +39,8 @@ Installation
 
 Clone the repository and install the required dependencies:
 
-'''
-git clone https://github.com/your-org/dead-reckoning-ml.git
+```
+git clone https://github.com/Hughhh02/SBST-BusLocator.git
 cd dead-reckoning-ml
 pip install -r requirements.txt
-'''
+```
