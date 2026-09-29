@@ -8,7 +8,7 @@ The system provides continuous, zero-drift localization by fusing real-time visu
 The localization pipeline completely eliminates the need for expensive infrastructure by treating the bus as an autonomous agent. It operates across two parallel engines:
 
 **1. Kinematic Engine (Dead Reckoning)**
-Because direct J1939 CAN tapping and steering angle sensors are unavailable, the system relies on differential kinematics pulled from the Stratio Predictive Maintenance API.
+The system relies on differential kinematics pulled from the Stratio Predictive Maintenance API.
 
 Longitudinal Speed: Derived from Vehicle Speed (ID 114) or Tacho Speed (ID 460).
 Yaw Rate (Heading): Calculated via differential wheel speeds using the Front Left (ID 463) and Front Right (ID 464) axle rotations divided by the physical track width of the bus chassis.
